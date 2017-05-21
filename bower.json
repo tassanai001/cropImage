@@ -1,0 +1,20 @@
+{
+  "name": "Blank_GULP_mean",
+  "version": "0.0.3",
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-sanitize": "~1.4.8",
+    "angular-mocks": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "angular-strap": "^2.0.0",
+    "jquery": "*",
+    "bootstrap": "^3.2.0",
+    "toastr": "^2.0.3",
+    "async" : "^1.5.0",
+    "blockUI": "*",
+    "spin.js": "~2.0.2"
+  },
+  "private": false
+}

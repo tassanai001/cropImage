@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app="MainApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Blank_EJS LOL My Awesome App</title>
+    <meta name="description" content="Our Public Project">
+    <meta name="author" content="">
+    <meta name="fragment" content="!" />
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css" />
+    <link rel="stylesheet" href="kendo/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="kendo/styles/kendo.dataviz.black.min.css" />
+    <link rel="stylesheet" href="node_modules/cropperjs/dist/cropper.min.css" />
+    <link rel="stylesheet" href="node_modules/components-font-awesome/css/font-awesome.min.css">
+
+    <link rel='stylesheet' href='css/style.css' />
+    <script type="text/javascript" src="node_modules/cropperjs/dist/cropper.js"></script>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-strap/dist/angular-strap.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-strap/dist/angular-strap.tpl.min.js"></script>
+
+    <script type="text/javascript" src="node_modules/block-ui/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/spin.js/spin.js"></script>
+    <script type="text/javascript" src="node_modules/toastr/build/toastr.min.js"></script>
+    <script type="text/javascript" src="kendo/js/kendo.all.min.js"></script>
+
+    <!--TODO : Upload file-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body id="spinner">
+    <div class="container" ng-controller="globalCtrl">
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <span class="glyphicon glyphicon-cloud-upload"></span>
+                                <h2>File Uploader</h2>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"></div>
+                                </div>
+                                <button class="btn btn-lg upload-btn" type="button">Upload File</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+            </div>
+            <div class="column">
+                <%- body %>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="dist/alljavascript.js"></script>
+</body>
+
+</html>
