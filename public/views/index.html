@@ -5,7 +5,6 @@
                 <div class="box">
                     <article class="media is-primary">
                         <img id="image" />
-                        <!--<img id="image" src="uploads/1495370654279.png" />-->
                     </article>
                 </div>
                 <div class="tile is-parent">
@@ -22,12 +21,21 @@
                                         <span class="icon"><i class="fa fa-repeat"></i></span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a ng-click="getCroppedCanvas()" class="button is-primary">GET</a>
-                                </li>
                             </ul>
                         </div>
                     </article>
+                </div>
+                <p>
+                    <a ng-click="getCroppedCanvas()" data-target="#modal" class="button is-primary is-large modal-button">get crop image</a>
+                </p>
+                <div id="modal" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <p class="image is-4by3">
+                            <img id="imagecrop">
+                        </p>
+                    </div>
+                    <button class="modal-close"></button>
                 </div>
             </div>
         </div>

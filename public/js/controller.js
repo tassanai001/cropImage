@@ -5,9 +5,8 @@
             { Name: 'Sample' }
         ];
         $scope.directiveTest = "HELLO WORLD";
-        $rootScope.images = "1495380793494.png";
+        $rootScope.images = "exampleimage.png";
 
-        // TODO: Upload Files
         $('.upload-btn').on('click', function () {
             $('#upload-input').click();
             $('.progress-bar').text('0%');
@@ -31,6 +30,9 @@
                     contentType: false,
                     success: function (data) {
                         $rootScope.images = data;
+                        $rootScope.cropper.destroy();
+                        var image = document.getElementById("image");
+                        image.src = "uploads/" + $rootScope.images;
                         $rootScope.initmainMT();
                     },
                     xhr: function () {

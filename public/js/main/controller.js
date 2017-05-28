@@ -15,16 +15,11 @@
 
         $rootScope.initmainMT = function () {
             console.log("---------- initmainMT ----------");
-
             var image = document.getElementById("image");
             image.src = "uploads/" + $rootScope.images;
             var previews = document.querySelectorAll(".preview");
-            $scope.cropper = new Cropper(image, {
+            $rootScope.cropper = new Cropper(image, {
                 ready: function (param1, param2) {
-
-
-                    // this.cropper.replace(image.src, false);
-
                     var clone = this.cloneNode();
                     clone.className = "";
                     clone.style.cssText = (
@@ -45,9 +40,6 @@
                     var cropper = this.cropper;
                     var imageData = cropper.getImageData();
                     var previewAspectRatio = data.width / data.height;
-
-
-
                     angular.forEach(previews, function (elem) {
                         console.log("elem: ", elem);
                         var previewImage = elem.getElementsByTagName("img").item(0);
@@ -62,44 +54,54 @@
                     });
                 }
             });
-            $scope.cropper.destroy();
-            $scope.cropper.replace(image.src, false);
-            console.log("555: ");
         };
 
         $scope.retateImage = function (side) {
             if (side === "left") {
-                $scope.cropper.rotate(-45);
+                $rootScope.cropper.rotate(-45);
             } else {
-                $scope.cropper.rotate(45);
+                $rootScope.cropper.rotate(45);
             }
         };
 
-        // TODO : getCropped
         $scope.getCroppedCanvas = function () {
-            $scope.cropper.getCroppedCanvas({
+            $rootScope.cropper.getCroppedCanvas({
                 width: 160,
                 height: 90
             });
-            $scope.cropper.getCroppedCanvas().toBlob(function (blob) {
+            $rootScope.cropper.getCroppedCanvas().toBlob(function (blob) {
                 var formData = new FormData();
-                formData.append('croppedImage', blob);
+                formData.append("croppedImage", blob);
                 $.ajax({
-                    url: '/upload/',
+                    url: "/upload/",
                     method: "POST",
                     data: formData,
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        console.log('Upload success', response);
+                        console.log("----: Upload success :----");
                         $rootScope.images = response;
-                        $rootScope.initmainMT();
+                        var imagecrop = document.getElementById("imagecrop");
+                        imagecrop.src = "uploads/" + response;
                     },
                     error: function () {
-                        console.log('Upload error');
+                        console.log("Upload error");
                     }
                 });
             });
         }
+
+        // TODO : Bluma Modal
+        $(".modal-button").click(function () {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+        });
+
+        $(".modal-close").click(function () {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+        });
+
     });
 })();
