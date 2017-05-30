@@ -1,8 +1,8 @@
 (function () {
     app.controller("globalCtrl", function ($rootScope, $scope) {
         $scope.pageData = [
-            { Name: 'Home' },
-            { Name: 'Sample' }
+            {Name: 'Home'},
+            {Name: 'Sample'}
         ];
         $scope.directiveTest = "HELLO WORLD";
         $rootScope.images = "exampleimage.png";

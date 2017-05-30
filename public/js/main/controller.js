@@ -8,7 +8,7 @@
         };
 
         $scope.SubmitKeyword = function () {
-            searchEngineService.addKeyword({ keywords: $scope.inputkeywords }).then(function (result) {
+            searchEngineService.addKeyword({keywords: $scope.inputkeywords}).then(function (result) {
                 console.log(result);
             });
         };
@@ -73,7 +73,7 @@
                 var formData = new FormData();
                 formData.append("croppedImage", blob);
                 $.ajax({
-                    url: "/upload/",
+                    url: "/upload/getCropp/",
                     method: "POST",
                     data: formData,
                     processData: false,
@@ -81,6 +81,7 @@
                     success: function (response) {
                         console.log("----: Upload success :----");
                         $rootScope.images = response;
+                        console.log(response);
                         var imagecrop = document.getElementById("imagecrop");
                         imagecrop.src = "uploads/" + response;
                     },
@@ -89,7 +90,7 @@
                     }
                 });
             });
-        }
+        };
 
         // TODO : Bluma Modal
         $(".modal-button").click(function () {

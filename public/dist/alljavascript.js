@@ -71,8 +71,8 @@ var token = "XXX";
 (function () {
     app.controller("globalCtrl", function ($rootScope, $scope) {
         $scope.pageData = [
-            { Name: 'Home' },
-            { Name: 'Sample' }
+            {Name: 'Home'},
+            {Name: 'Sample'}
         ];
         $scope.directiveTest = "HELLO WORLD";
         $rootScope.images = "exampleimage.png";
@@ -169,7 +169,7 @@ var token = "XXX";
         };
 
         $scope.SubmitKeyword = function () {
-            searchEngineService.addKeyword({ keywords: $scope.inputkeywords }).then(function (result) {
+            searchEngineService.addKeyword({keywords: $scope.inputkeywords}).then(function (result) {
                 console.log(result);
             });
         };
@@ -234,7 +234,7 @@ var token = "XXX";
                 var formData = new FormData();
                 formData.append("croppedImage", blob);
                 $.ajax({
-                    url: "/upload/",
+                    url: "/upload/getCropp/",
                     method: "POST",
                     data: formData,
                     processData: false,
@@ -242,6 +242,7 @@ var token = "XXX";
                     success: function (response) {
                         console.log("----: Upload success :----");
                         $rootScope.images = response;
+                        console.log(response);
                         var imagecrop = document.getElementById("imagecrop");
                         imagecrop.src = "uploads/" + response;
                     },
@@ -250,7 +251,7 @@ var token = "XXX";
                     }
                 });
             });
-        }
+        };
 
         // TODO : Bluma Modal
         $(".modal-button").click(function () {

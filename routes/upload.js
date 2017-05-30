@@ -1,49 +1,66 @@
 let express = require("express");
 let router = express.Router();
-let app = express();
 let path = require("path");
-let formidable = require("formidable");
 let fs = require("fs");
-
 let gm = require("gm");
+let formidable = require("formidable");
 
 router.post("/", (req, res) => {
-    let uploadPath = path.join(__dirname.replace("routes", "public"), '/uploads');
-    console.log("uploadPath: ", uploadPath);
+    uploadImage(req, "upload", (cb) => {
+        res.send(cb);
+    });
+});
+
+router.post("/getCropp", (req, res) => {
+    uploadImage(req, "getcrop", (cb) => {
+        res.send(cb);
+    });
+});
+
+let uploadImage = (req, status, callback) => {
+    let uploadPath = path.join(__dirname.replace("routes", "public"), "/uploads");
     let form = new formidable.IncomingForm();
     let fileName = "";
+    let fileNameAdd = "";
     form.multiples = true;
     form.uploadDir = uploadPath;
-    chkExistsfile(form.uploadDir, (bExist) => {
-        form.on("file", function (field, file) {
+    chkExistsfile(form.uploadDir, () => {
+        form.on("file", (field, file) => {
             fileName = Number(new Date) + ".png";
             file.name = fileName.toString();
+            fileNameAdd = file.name;
             fs.rename(file.path, path.join(form.uploadDir, file.name));
         });
-        form.on("error", function (err) {
+        form.on("error", (err) => {
             console.log("An error has occured: \n" + err);
-            // res.send(err);
+            callback(err);
         });
-        form.on("end", function () {
-            res.end(fileName);
-
-            // gm(uploadPath + "\\1495964011421.png").append(uploadPath + "\\1495966519706.png", true).write(uploadPath + "\\test.png",
-            //     function (err, stdout, stderr, command) {
-            //         if (err) {
-            //             console.log('image conversion error!');
-            //             console.log(err);
-            //             console.log(command);
-            //         } else {
-            //             console.log('image converted with command :');
-            //             console.log(command);
-            //         }
-            //     })
-
-
+        form.on("end", () => {
+            getCroppImage(status, uploadPath, fileNameAdd, fileName, (cb) => {
+                callback(cb);
+            });
         });
         form.parse(req);
     });
-});
+};
+
+let getCroppImage = (status, uploadPath, fileNameAdd, fileName, callback) => {
+    if (status === "getcrop") {
+        gm(uploadPath + "\\" + fileNameAdd).append(uploadPath + "\\testmerge.png", true)
+            .write(uploadPath + "\\" + fileNameAdd.replace(".png", "") + "testmerge.png",
+                (err) => {
+                    fileName = fileNameAdd.replace(".png", "") + "testmerge.png";
+                    if (err) {
+                        console.log("image conversion error! \n", err);
+                        callback(err);
+                    } else {
+                        callback(fileName);
+                    }
+                });
+    } else {
+        callback(fileName);
+    }
+};
 
 let chkExistsfile = (path, callback) => {
     fs.exists(path, (exists) => {
@@ -55,7 +72,7 @@ let chkExistsfile = (path, callback) => {
             callback("done");
         }
     });
-}
+};
 
 let createFile = (path, callback) => {
     fs.mkdir(path, (err) => {
@@ -65,6 +82,6 @@ let createFile = (path, callback) => {
             callback("done");
         }
     });
-}
+};
 
 module.exports = router;
