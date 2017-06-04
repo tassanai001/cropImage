@@ -25,10 +25,33 @@
                         </div>
                     </article>
                 </div>
+                <div class="field">
+                    <p class="control">
+                        <input class="input is-primary is-large" type="text" placeholder="Input Text.">
+                    </p>
+                </div>
                 <p>
                     <a ng-click="getCroppedCanvas()" data-target="#modal" class="button is-primary is-large modal-button">get crop image</a>
                 </p>
+
+
+                <!--Drag Drop Image-->
+                <div class="column" style="background: url(http://localhost:3000/uploads/1496583470090testmerge.png); background-size:contain;">
+                    <div id="drag-1" class="draggable">
+                        <p> You can drag one element </p>
+                    </div>
+                </div>
+
+
                 <div id="modal" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="container">
+                        <img id="imagecrop" class="img-rounded">
+                    </div>
+                    <button class="modal-close"></button>
+                </div>
+
+                <!--<div id="modal" class="modal">
                     <div class="modal-background"></div>
                     <div class="modal-content">
                         <p class="image is-4by3">
@@ -36,7 +59,9 @@
                         </p>
                     </div>
                     <button class="modal-close"></button>
-                </div>
+                </div>-->
+
+
             </div>
         </div>
     </div>
@@ -46,10 +71,36 @@
     img {
         max-width: 100%;
     }
-    
+
     .preview {
         overflow: hidden;
         width: 50px;
         height: 50px;
+    }
+
+    .bgimg {
+        background-image: url("http://localhost:3000/uploads/exampleimage.png");
+    }
+    /*Drag Drop Image*/
+
+    #drag-1 {
+        width: 25%;
+        height: 100%;
+        min-height: 6.5em;
+        margin: 10%;
+
+        background-color: #29e;
+        color: white;
+
+        border-radius: 0.75em;
+        padding: 4%;
+
+        -webkit-transform: translate(0px, 0px);
+        transform: translate(0px, 0px);
+    }
+
+    #drag-me::before {
+        content: "#" attr(id);
+        font-weight: bold;
     }
 </style>
